@@ -49,7 +49,20 @@ function buscaProduto($conexao, $id) {
 
 	$query = "select * from produtos where id = {$id}";
 	$resultado = mysqli_query($conexao, $query);
-	$produto = mysqli_fetch_assoc($resultado);
+	$produto_array = mysqli_fetch_assoc($resultado);
+
+	$produto = new Produto();
+	$categoria = new Categoria();
+
+	$categoria->nome = $produto_array['categoria_nome'];
+
+	$produto->id = $produto_array['id'];
+	$produto->nome = $produto_array['nome'];
+	$produto->preco = $produto_array['preco'];		
+	$produto->descricao = $produto_array['descricao'];
+	$produto->categoria = $categoria;
+	$produto->usado = $produto_array['usado'];		
+
 
 	return $produto;
 }

@@ -23,7 +23,7 @@ if(array_key_exists('usado', $_POST)) {
 	$produto->usado = "false";
 }
 
-$produto->categoria = $categoria
+$produto->categoria = $categoria;
 
 if(insereProduto($conexao, $produto)) { ?>
 	<p class="text-success">O produto <?= $produto->nome ?>, <?= $produto->preco ?> foi adicionado.</p>
