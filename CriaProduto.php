@@ -1,6 +1,5 @@
 <?php  
 	
-	require_once('class/Produto.php');
 
 	$livro = new Produto();
 

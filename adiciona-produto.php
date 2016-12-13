@@ -1,31 +1,31 @@
 <?php 
 require_once("cabecalho.php");
-require_once("banco-produto.php");
 require_once("logica-usuario.php");
-require_once("class/Produto.php");
-require_once("class/Categoria.php");
-
 
 verificaUsuario();
 
-$produto = new Produto();
+
 $categoria = new Categoria();
 
 $categoria->setId($_POST['categoria_id']); 
 
-$produto->setNome($_POST['nome']);
-$produto->setPreco($_POST['preco']);
-$produto->setDescricao($_POST['descricao']);
+$nome = $_POST['nome'];
+$preco = $_POST['preco'];
+$descricao = $_POST['descricao'];
 
 if(array_key_exists('usado', $_POST)) {
-	$produto->setUsado("true");
+	$usado = "true";
 } else {
-	$produto->setUsado("false");
+	$usado = "false";
 }
 
-$produto->setCategoria($categoria);
 
-if(insereProduto($conexao, $produto)) { ?>
+$produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
+
+$produtoDao = new ProdutoDao($conexao);
+
+
+if($produtoDao->insereProduto($produto)) { ?>
 	<p class="text-success">O produto <?= $produto->getNome() ?>, <?= $produto->getPreco() ?> foi adicionado.</p>
 <?php 
 } else {

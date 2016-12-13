@@ -9,6 +9,15 @@
 		private $categoria;
 		private $usado;
 
+		//construtor
+		function __construct($nome, $preco, $descricao, Categoria $categoria, $usado){
+			$this->nome = $nome;
+			$this->preco = $preco;
+			$this->descricao = $descricao;
+			$this->categoria = $categoria;
+			$this->usado = $usado;
+		}
+
 
 		public function precoComDesconto($valor = 0.1){
 			if ($valor > 0 && $valor <= 0.5) {
@@ -48,15 +57,6 @@
 			return $this->id;
 		}
 
-		public function setNome($valor){
-			$this->nome = $valor;
-		}
-		public function setDescricao($valor){
-			$this->descricao = $valor;
-		}
-		public function setCategoria($valor){
-			$this->categoria = $valor;
-		}
 		public function setId($valor){
 			$this->id = $valor;
 		}
@@ -64,6 +64,13 @@
 			$this->usado = $valor;
 		}
 
+		function __toString(){
+			return $this->nome . " : R$". $this->preco;
+		}
+
+		function __destruct(){
+			
+		}
 	}
 
 ?>

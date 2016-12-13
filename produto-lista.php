@@ -1,13 +1,13 @@
 <?php
-require_once("cabecalho.php");
-require_once("banco-produto.php");
+	require_once("cabecalho.php");
 ?>
 
 <table class="table table-striped table-bordered">
 	<?php
-		$produtos = listaProdutos($conexao);
-		foreach($produtos as $produto) :
+		$produtoDao = new produtoDao($conexao);
+		$produtos = $produtoDao->listaProdutos();
 	?>
+	<?php foreach($produtos as $produto) :  ?>
 		<tr>
 			<td><?= $produto->getNome() ?></td>
 			<td><?= $produto->getPreco() ?></td>
@@ -22,9 +22,7 @@ require_once("banco-produto.php");
 				</form>
 			</td>
 		</tr>
-	<?php
-	endforeach
-	?>	
+	<?php endforeach ?>
 </table>
 
 
