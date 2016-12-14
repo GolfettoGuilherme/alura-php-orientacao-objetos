@@ -57,6 +57,8 @@
 			return $this->id;
 		}
 
+
+
 		public function setId($valor){
 			$this->id = $valor;
 		}
@@ -70,6 +72,11 @@
 
 		function __destruct(){
 			
+		}
+
+		public function temIsbn(){
+			//se for um livro, retorna true
+			return $this instanceof Livro;
 		}
 	}
 

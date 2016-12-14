@@ -9,9 +9,11 @@ $categoria = new Categoria();
 
 $categoria->setId($_POST['categoria_id']); 
 
-$nome = $_POST['nome'];
+$nome  = $_POST['nome'];
 $preco = $_POST['preco'];
+$isbn  = $_POST['isbn'];
 $descricao = $_POST['descricao'];
+$tipoProduto = $_POST['tipoProduto'];
 
 if(array_key_exists('usado', $_POST)) {
 	$usado = "true";
@@ -19,8 +21,12 @@ if(array_key_exists('usado', $_POST)) {
 	$usado = "false";
 }
 
-
-$produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
+if ($tipoProduto == "Livro") {
+	$produto = new Livro($nome, $preco, $descricao, $categoria, $usado);
+	$produto->setIsbn($isbn);
+} else {
+	$produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
+}
 
 $produtoDao = new ProdutoDao($conexao);
 
