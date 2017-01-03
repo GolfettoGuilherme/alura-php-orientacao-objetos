@@ -44,18 +44,19 @@
 	<td>Tipo do Produto</td>
 	<td>
 		<select name="tipoProduto" class="form-control">
-			<?php
-			$tipos = array("Produto", "Livro");
-			foreach($tipos as $tipo) : 
-				$essaEhOTipo = get_class($produto)  == $tipo;
-				$selecao = $essaEhOTipo ? "selected='selected'" : "";
-			?>
-				<option value="<?=$tipo ?>" <?=$selecao?>>
-					<?=$tipo ?>
-				</option>
-			<?php 
-			endforeach
-			?>
+			<optgroup label="Livros">
+				<?php
+				$tipos = array("Livro Fisico", "Ebook");
+				foreach($tipos as $tipo) : 
+					$tipoSemEspaco = str_replace(" ", "", $tipo);
+					$essaEhOTipo = get_class($produto)  == $tipoSemEspaco;
+					$selecao = $essaEhOTipo ? "selected='selected'" : "";
+				?>
+					<option value="<?=$tipoSemEspaco ?>" <?=$selecao?>>
+						<?=$tipo ?>
+					</option>		
+				<?php endforeach ?>
+			</optgroup>			
 		</select>
 	</td>
 </tr>
@@ -66,6 +67,26 @@
 			<input type="text" name="isbn" class="form-control" value="<?= $produto->getIsbn() ?>">
 		<?php else: ?>
 			<input type="text" name="isbn" class="form-control">
+		<?php endif ?>
+	</td>
+</tr>
+<tr>
+	<td>Taxa Impressão (caso seja um livro Físico)</td>
+	<td>
+		<?php if ($produto->temTaxaImpressao()): ?>
+			<input type="text" name="taxaImpressao" class="form-control" value="<?= $produto->getTaxaImpressao() ?>">
+		<?php else: ?>
+			<input type="text" name="taxaImpressao" class="form-control">
+		<?php endif ?>
+	</td>
+</tr>
+<tr>
+	<td>WaterMark (caso seja um livro)</td>
+	<td>
+		<?php if ($produto->temWaterMark()): ?>
+			<input type="text" name="waterMark" class="form-control" value="<?= $produto->getWaterMark() ?>">
+		<?php else: ?>
+			<input type="text" name="waterMark" class="form-control">
 		<?php endif ?>
 	</td>
 </tr>

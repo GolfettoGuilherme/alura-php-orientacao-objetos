@@ -1,6 +1,6 @@
 <?php  
 	
-	class Produto{
+	abstract class Produto{
 
 		private $id;
 		private $nome;
@@ -57,6 +57,12 @@
 			return $this->id;
 		}
 
+		public function calculaImposto(){
+			return $this->preco * 0.195;
+			
+		}
+
+		abstract public function atualizaBaseadoEm($params);
 
 
 		public function setId($valor){
@@ -77,6 +83,15 @@
 		public function temIsbn(){
 			//se for um livro, retorna true
 			return $this instanceof Livro;
+		}
+
+		public function temTaxaImpressao(){
+			//se for um livro, retorna true
+			return $this instanceof LivroFisico;
+		}
+		public function temWaterMark(){
+			//se for um livro, retorna true
+			return $this instanceof Ebook;
 		}
 	}
 

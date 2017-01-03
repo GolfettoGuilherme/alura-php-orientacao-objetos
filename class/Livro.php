@@ -1,16 +1,20 @@
 <?php 
 
-class Livro extends Produto{
+	abstract class Livro extends Produto{
 
-	private $isbn;
+		private $isbn;
 
+		public function getIsbn(){
+			return $this->isbn;
+		}
+		public function setIsbn($valor){
+			$this->isbn = $valor;
+		}
 
-	public function getIsbn(){
-		return $this->isbn;
+		public function calculaImposto(){
+			//tive que usar o get porque a prop preço é private
+			return $this->getPreco() * 0.065;
+		}
 	}
-	public function setIsbn($valor){
-		$this->isbn = $valor;
-	}
 
-}
 ?>
